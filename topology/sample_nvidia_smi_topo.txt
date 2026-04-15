@@ -1,0 +1,11 @@
+        GPU0    GPU1    GPU2    GPU3    CPU Affinity    NUMA Affinity
+GPU0     X      NV4     PHB     SYS    0-47            N/A
+GPU1    NV4      X      PHB     SYS    0-47            N/A
+GPU2    PHB     PHB      X      NV4    48-95           N/A
+GPU3    SYS     SYS     NV4      X     48-95           N/A
+
+Legend:
+  X    = Self
+  SYS  = Connection traversing PCIe as well as SMP interconnect
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge
+  NV4  = Connection traversing a bonded set of 4 NVLinks

@@ -1,0 +1,12 @@
+groups:
+  - name: nimbusmesh
+    rules:
+      - alert: NimbusMeshHighP95Latency
+        expr: nimbusmesh_latency_p95_ms > 2500
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "NimbusMesh-X p95 latency is elevated"
+          description: "The simulated control plane is reporting p95 latency above 2500 ms."
+

@@ -1,0 +1,8 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY . /app
+RUN pip install --no-cache-dir -e .
+
+CMD ["python", "scripts/run_benchmarks.py", "--config", "configs/multi_cluster_long_context.json"]
+

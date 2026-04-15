@@ -1,0 +1,56 @@
+{
+  "title": "NimbusMesh-X Overview",
+  "schemaVersion": 39,
+  "version": 1,
+  "panels": [
+    {
+      "id": 1,
+      "title": "p95 Latency",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "nimbusmesh_latency_p95_ms"
+        }
+      ],
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": 2,
+      "title": "Cache Hit Ratio",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "nimbusmesh_cache_hit_ratio"
+        }
+      ],
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      }
+    },
+    {
+      "id": 3,
+      "title": "Requests Total",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "nimbusmesh_requests_total"
+        }
+      ],
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      }
+    }
+  ]
+}
+

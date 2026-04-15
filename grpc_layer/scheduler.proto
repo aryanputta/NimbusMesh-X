@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package nimbusmesh;
+
+message Candidate {
+  string cluster_id = 1;
+  string pool_id = 2;
+  double estimated_latency_ms = 3;
+  double queue_delay_ms = 4;
+  double cache_hit_ratio = 5;
+  double topology_affinity = 6;
+  double network_cost = 7;
+  double accelerator_cost_per_1m_tokens = 8;
+  double fairness_penalty = 9;
+  bool available = 10;
+}
+
+message PlacementRequest {
+  string request_id = 1;
+  string tenant_id = 2;
+  string model_id = 3;
+  string sla_class = 4;
+  string policy_name = 5;
+  repeated Candidate candidates = 6;
+}
+
+message PlacementResponse {
+  int32 chosen_index = 1;
+  string reason = 2;
+}
+
+service SchedulerService {
+  rpc ChoosePlacement (PlacementRequest) returns (PlacementResponse);
+}
+

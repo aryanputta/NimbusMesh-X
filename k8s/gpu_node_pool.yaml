@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nimbusmesh-gpu-worker
+spec:
+  nodeSelector:
+    accelerator: gpu-premium-pool
+  containers:
+    - name: worker
+      image: nimbusmesh/scheduler:latest
+      resources:
+        limits:
+          nvidia.com/gpu: "1"
+          memory: "32Gi"
+          cpu: "8"
+

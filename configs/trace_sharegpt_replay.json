@@ -1,0 +1,108 @@
+{
+  "name": "trace-sharegpt-replay",
+  "seed": 71,
+  "policy": "multi_objective",
+  "decision_log_path": "experiments/logs/trace-sharegpt-replay.jsonl",
+  "metrics_output_path": "experiments/results/trace-sharegpt-replay-summary.json",
+  "workload": {
+    "request_count": 5000,
+    "duration_s": 120,
+    "arrival_pattern": "poisson",
+    "trace_path": "data/workloads/sharegpt_workload.csv",
+    "trace_replay_speed": 1.0,
+    "trace_default_model": "llama-3-70b",
+    "trace_default_sla": "interactive",
+    "trace_limit": 5000,
+    "prompt_tokens": {
+      "distribution": "lognormal",
+      "mean": 1000,
+      "sigma": 0.8,
+      "min": 32,
+      "max": 32768
+    },
+    "generation_tokens": {
+      "distribution": "lognormal",
+      "mean": 600,
+      "sigma": 0.6,
+      "min": 32,
+      "max": 8192
+    },
+    "tenant_weights": {
+      "sharegpt-001": 0.3,
+      "sharegpt-002": 0.25,
+      "sharegpt-003": 0.2,
+      "sharegpt-004": 0.15,
+      "sharegpt-005": 0.1
+    },
+    "model_mix": {
+      "llama-3-70b": 0.6,
+      "mixtral-8x7b": 0.25,
+      "llama-3-8b": 0.15
+    },
+    "sla_mix": {
+      "realtime": 0.2,
+      "interactive": 0.6,
+      "best_effort": 0.2
+    },
+    "session_reuse_probability": 0.85,
+    "burst_factor": 1.4,
+    "cache_hostility": 0.05
+  },
+  "clusters": [
+    {
+      "cluster_id": "eastus-bw",
+      "zone": "eastus",
+      "ingress_cost": 1.0,
+      "network_costs": {
+        "centralus-h100": 1.25
+      },
+      "base_congestion": 0.1,
+      "pools": [
+        {
+          "pool_id": "bw-premium",
+          "backend_name": "triton",
+          "accelerator_type": "nvidia-blackwell-b200",
+          "supported_models": ["llama-3-70b", "mixtral-8x7b", "llama-3-8b"],
+          "prefill_tps": 34000,
+          "decode_tps": 16200,
+          "memory_gb": 1536,
+          "gpu_count": 8,
+          "parallel_slots": 18,
+          "cost_per_1m_tokens": 5.8,
+          "energy_proxy": 1.45,
+          "topology_tier": "nvlink-mesh",
+          "premium": true,
+          "queue_limit": 96
+        }
+      ]
+    },
+    {
+      "cluster_id": "centralus-h100",
+      "zone": "centralus",
+      "ingress_cost": 1.1,
+      "network_costs": {
+        "eastus-bw": 1.25
+      },
+      "base_congestion": 0.14,
+      "pools": [
+        {
+          "pool_id": "h100-main",
+          "backend_name": "vllm",
+          "accelerator_type": "nvidia-h100",
+          "supported_models": ["llama-3-70b", "mixtral-8x7b", "llama-3-8b"],
+          "prefill_tps": 20500,
+          "decode_tps": 9800,
+          "memory_gb": 720,
+          "gpu_count": 8,
+          "parallel_slots": 14,
+          "cost_per_1m_tokens": 3.7,
+          "energy_proxy": 1.0,
+          "topology_tier": "nvlink-ring",
+          "premium": false,
+          "queue_limit": 84
+        }
+      ]
+    }
+  ]
+}
+

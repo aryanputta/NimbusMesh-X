@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nimbusmesh-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nimbusmesh-scheduler
+  template:
+    metadata:
+      labels:
+        app: nimbusmesh-scheduler
+    spec:
+      containers:
+        - name: scheduler
+          image: nimbusmesh/scheduler:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: NIMBUS_USE_CUDA
+              value: "0"
+

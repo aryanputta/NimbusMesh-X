@@ -1,0 +1,90 @@
+{
+  "name": "heterogeneous-accelerator-routing",
+  "seed": 52,
+  "policy": "multi_objective",
+  "decision_log_path": "experiments/logs/heterogeneous-accelerator-routing.jsonl",
+  "metrics_output_path": "experiments/results/heterogeneous-accelerator-routing-summary.json",
+  "fairness_strength": 0.3,
+  "workload": {
+    "request_count": 650,
+    "duration_s": 70,
+    "arrival_pattern": "poisson",
+    "prompt_tokens": {
+      "distribution": "lognormal",
+      "mean": 2600,
+      "sigma": 0.6,
+      "min": 128,
+      "max": 16384
+    },
+    "generation_tokens": {
+      "distribution": "lognormal",
+      "mean": 780,
+      "sigma": 0.45,
+      "min": 128,
+      "max": 3072
+    },
+    "tenant_weights": {
+      "realtime-apps": 0.25,
+      "copilot": 0.3,
+      "batch-agents": 0.2,
+      "analytics": 0.25
+    },
+    "model_mix": {
+      "llama-3-70b": 0.2,
+      "llama-3-8b": 0.5,
+      "deepseek-v2-lite": 0.3
+    },
+    "sla_mix": {
+      "realtime": 0.22,
+      "interactive": 0.48,
+      "best_effort": 0.3
+    },
+    "session_reuse_probability": 0.55,
+    "burst_factor": 1.1,
+    "cache_hostility": 0.18
+  },
+  "clusters": [
+    {
+      "cluster_id": "centralus-hetero",
+      "zone": "centralus",
+      "ingress_cost": 1.0,
+      "network_costs": {},
+      "base_congestion": 0.08,
+      "pools": [
+        {
+          "pool_id": "premium-h100",
+          "backend_name": "vllm",
+          "accelerator_type": "nvidia-h100",
+          "supported_models": ["llama-3-70b", "llama-3-8b", "deepseek-v2-lite"],
+          "prefill_tps": 20000,
+          "decode_tps": 9600,
+          "memory_gb": 720,
+          "gpu_count": 8,
+          "parallel_slots": 14,
+          "cost_per_1m_tokens": 3.8,
+          "energy_proxy": 1.0,
+          "topology_tier": "nvlink-ring",
+          "premium": true,
+          "queue_limit": 84
+        },
+        {
+          "pool_id": "economy-maia",
+          "backend_name": "mock",
+          "accelerator_type": "microsoft-maia-200-sim",
+          "supported_models": ["llama-3-8b", "deepseek-v2-lite"],
+          "prefill_tps": 15500,
+          "decode_tps": 7900,
+          "memory_gb": 640,
+          "gpu_count": 8,
+          "parallel_slots": 12,
+          "cost_per_1m_tokens": 2.4,
+          "energy_proxy": 0.78,
+          "topology_tier": "pcie-fabric",
+          "premium": false,
+          "queue_limit": 92
+        }
+      ]
+    }
+  ]
+}
+

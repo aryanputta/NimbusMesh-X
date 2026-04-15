@@ -1,0 +1,17 @@
+[
+  {
+    "id": "arena-1",
+    "prompt": "Write a runbook for a GPU cluster experiencing congestion.",
+    "response": "Detect queue growth, inspect interconnect utilization, and shift best-effort traffic first.",
+    "model": "llama-3-8b",
+    "user_id": "u-101"
+  },
+  {
+    "id": "arena-2",
+    "prompt": "Draft policy for routing between premium and economy accelerators.",
+    "response": "Use SLA + latency headroom + predicted cost to route non-critical requests to economy pools.",
+    "model": "mixtral-8x7b",
+    "user_id": "u-115"
+  }
+]
+

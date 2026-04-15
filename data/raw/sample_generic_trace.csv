@@ -1,0 +1,6 @@
+timestamp,request_id,prompt_length,expected_output_length,tenant_id,priority_class,model_id,session_id
+0.0,req-000001,512,128,tenant-a,interactive,llama-3-8b,tenant-a-session-1
+0.4,req-000002,2048,400,tenant-b,realtime,mixtral-8x7b,tenant-b-session-0
+1.1,req-000003,640,256,tenant-a,interactive,llama-3-8b,tenant-a-session-1
+2.6,req-000004,8192,600,tenant-c,best_effort,llama-3-70b,tenant-c-session-2
+

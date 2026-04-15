@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nimbusmesh-x"
+version = "0.1.0"
+description = "Topology-aware and cache-aware inference orchestration for heterogeneous AI factories."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115.0",
+  "httpx>=0.28.0",
+  "uvicorn>=0.30.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0"]
+cuda = ["numpy>=2.0.0", "pycuda>=2024.1"]
+viz = ["matplotlib>=3.9.0", "rich>=13.7.0", "PyYAML>=6.0.2"]
+data = [
+  "datasets>=3.0.0",
+  "pandas>=2.2.0",
+  "pyarrow>=16.0.0",
+  "PyYAML>=6.0.2",
+]
+runtime = [
+  "redis>=5.0.0",
+  "psycopg[binary]>=3.2.0",
+  "ray[default]>=2.30.0",
+  "grpcio>=1.66.0",
+  "grpcio-tools>=1.66.0",
+]
+
+[tool.setuptools.packages.find]
+include = [
+  "azure_sim*",
+  "data_pipeline*",
+  "grpc_layer*",
+  "cuda_kernels*",
+  "ml*",
+  "nimbusmesh_x*",
+  "control_plane*",
+  "scheduler_core*",
+  "storage*",
+  "topology_service*",
+  "topology*",
+  "cache_directory*",
+  "cluster_scheduler*",
+  "serving_backends*",
+  "policies*",
+  "simulators*",
+  "workload_gen*",
+  "benchmarks*",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

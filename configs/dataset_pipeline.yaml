@@ -1,0 +1,21 @@
+jobs:
+  - normalizer: generic_csv
+    input: data/raw/sample_generic_trace.csv
+    output: data/workloads/sample_generic_trace.csv
+    default_model: llama-3-8b
+  - normalizer: sharegpt
+    input: data/raw/sample_sharegpt.json
+    output: data/workloads/sharegpt_workload.csv
+    default_model: llama-3-70b
+    limit: 2000
+  - normalizer: lmsys
+    input: data/raw/sample_lmsys.json
+    output: data/workloads/lmsys_workload.csv
+    default_model: mixtral-8x7b
+    limit: 2000
+  - normalizer: alibaba
+    input: data/raw/sample_alibaba.csv
+    output: data/workloads/alibaba_workload.csv
+    default_model: llama-3-8b
+    limit: 5000
+

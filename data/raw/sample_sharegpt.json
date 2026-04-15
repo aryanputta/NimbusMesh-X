@@ -1,0 +1,17 @@
+[
+  {
+    "id": "sg-1",
+    "conversations": [
+      {"from": "human", "value": "Plan a production rollout for a latency-critical inference service."},
+      {"from": "gpt", "value": "Start with canary clusters, measure p95 and p99, then expand by region."}
+    ]
+  },
+  {
+    "id": "sg-2",
+    "conversations": [
+      {"from": "human", "value": "How can I improve cache hit ratio for long context prompts?"},
+      {"from": "gpt", "value": "Use session-aware prefix signatures and keep hot chains colocated with decode workers."}
+    ]
+  }
+]
+

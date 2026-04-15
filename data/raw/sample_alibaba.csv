@@ -1,0 +1,6 @@
+start_time,task_id,cpu_usage,memory_usage,task_duration,machine_id,priority
+0.1,ali-0001,1.1,0.8,3.2,machine-a,interactive
+0.4,ali-0002,2.0,1.5,2.5,machine-a,realtime
+0.9,ali-0003,0.7,0.6,6.0,machine-b,best_effort
+1.4,ali-0004,1.4,1.0,1.5,machine-c,interactive
+

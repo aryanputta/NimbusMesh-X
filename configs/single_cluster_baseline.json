@@ -1,0 +1,71 @@
+{
+  "name": "single-cluster-baseline",
+  "seed": 7,
+  "policy": "least_queue",
+  "decision_log_path": "experiments/logs/single-cluster-baseline.jsonl",
+  "metrics_output_path": "experiments/results/single-cluster-baseline-summary.json",
+  "workload": {
+    "request_count": 400,
+    "duration_s": 60,
+    "arrival_pattern": "poisson",
+    "prompt_tokens": {
+      "distribution": "lognormal",
+      "mean": 1400,
+      "sigma": 0.55,
+      "min": 128,
+      "max": 8192
+    },
+    "generation_tokens": {
+      "distribution": "lognormal",
+      "mean": 640,
+      "sigma": 0.45,
+      "min": 64,
+      "max": 2048
+    },
+    "tenant_weights": {
+      "tenant-a": 0.45,
+      "tenant-b": 0.35,
+      "tenant-c": 0.2
+    },
+    "model_mix": {
+      "llama-3-8b": 0.6,
+      "mistral-7b": 0.4
+    },
+    "sla_mix": {
+      "realtime": 0.25,
+      "interactive": 0.55,
+      "best_effort": 0.2
+    },
+    "session_reuse_probability": 0.35,
+    "burst_factor": 1.0,
+    "cache_hostility": 0.35
+  },
+  "clusters": [
+    {
+      "cluster_id": "eastus-a",
+      "zone": "eastus",
+      "ingress_cost": 1.0,
+      "network_costs": {},
+      "base_congestion": 0.08,
+      "pools": [
+        {
+          "pool_id": "h100-main",
+          "backend_name": "vllm",
+          "accelerator_type": "nvidia-h100",
+          "supported_models": ["llama-3-8b", "mistral-7b"],
+          "prefill_tps": 18000,
+          "decode_tps": 9200,
+          "memory_gb": 640,
+          "gpu_count": 8,
+          "parallel_slots": 12,
+          "cost_per_1m_tokens": 3.4,
+          "energy_proxy": 1.0,
+          "topology_tier": "nvlink-ring",
+          "premium": true,
+          "queue_limit": 64
+        }
+      ]
+    }
+  ]
+}
+
