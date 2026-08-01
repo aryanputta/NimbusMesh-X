@@ -29,8 +29,8 @@ services:
   postgres:
     image: postgres:16
     environment:
-      POSTGRES_PASSWORD: nimbusmesh
-      POSTGRES_DB: nimbusmesh
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env or the shell}
+      POSTGRES_DB: ${POSTGRES_DB:-nimbusmesh}
     ports:
       - "5432:5432"
   metrics_exporter:
