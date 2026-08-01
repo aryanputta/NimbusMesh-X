@@ -139,6 +139,21 @@ curl -X POST http://127.0.0.1:8000/v1/route \
   }'
 ```
 
+## Visualizations
+
+The repository includes a clean Matplotlib chart for comparing p95 policy latency:
+
+```bash
+pip install -e ".[viz]"
+python scripts/plot_results.py
+```
+
+The script reads `results/latency.csv` and writes `results/latency_comparison.png`. Recreate the input with the simulation or reproducibility pipeline before plotting.
+
+## Local Secrets
+
+Docker Compose reads `POSTGRES_PASSWORD` from your shell or an untracked `.env` file. Start from `.env.example`; never commit `.env` or real credentials.
+
 ## Benchmark Modes
 
 Shipped configs cover the major modes from the project thesis:
