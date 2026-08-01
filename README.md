@@ -20,6 +20,8 @@ This repository is intentionally built as a systems project, not an LLM app shel
 - Optional gRPC service-to-service routing, Ray distributed sweeps, Redis cache metadata, PostgreSQL experiment persistence
 - Optional C++ scheduler core for low-latency candidate selection
 
+
+Project overview: https://aryanputta.com/projects#p2
 ## Thesis
 
 Modern inference stacks optimize isolated layers: Kubernetes scheduling, GPU allocation, serving runtime internals, or cache management. NimbusMesh-X instead treats inference placement as a cross-layer control-plane problem:
